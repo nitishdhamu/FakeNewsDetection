@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+data/raw/
+data/processed/
+*.csv
+*.db
+*.sqlite3
+.ipynb_checkpoints/
+models/
+*.pt
+*.h5
+*.pkl
+.env
+
