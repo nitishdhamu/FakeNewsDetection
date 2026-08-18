@@ -4,5 +4,8 @@ scikit-learn
 matplotlib
 seaborn
 jupyter
+fastapi
+uvicorn
+pydantic
 datasets
 joblib
