@@ -1,8 +1,11 @@
 import os
+import sys
 import joblib
 from sklearn.svm import LinearSVC
 from sklearn.metrics import classification_report, accuracy_score
 
+# ensure src directory is on sys.path for direct script execution
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from data_loader import load_fake_news_dataset
 from preprocess import preprocess_and_vectorize
 
@@ -28,19 +31,32 @@ def main():
     data_dir = os.path.join(project_root, 'data')
     models_dir = os.path.join(project_root, 'models')
     
+    # 1. load dataset
     train_df, val_df, test_df = load_fake_news_dataset(save_dir=data_dir)
+    
+    # 0 is Real, 1 is Fake
     train_texts = train_df['text'].tolist()
     train_labels = train_df['label'].tolist()
+    
     val_texts = val_df['text'].tolist()
     val_labels = val_df['label'].tolist()
+    
     test_texts = test_df['text'].tolist()
     test_labels = test_df['label'].tolist()
     
+    # 2. preprocess and vectorize
     X_train, X_val, X_test, vectorizer = preprocess_and_vectorize(
         train_texts, val_texts, test_texts, save_dir=models_dir
     )
+    
+    # 3. train svm model
     model = train_svm(X_train, train_labels, save_dir=models_dir)
+    
+    # 4. evaluate on validation and test sets
+    print("\nValidation Set Results:")
     evaluate_model(model, X_val, val_labels)
+    
+    print("\nTest Set Results:")
     evaluate_model(model, X_test, test_labels)
 
 if __name__ == "__main__":
