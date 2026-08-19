@@ -1,5 +1,6 @@
 import os
 import sys
+import math
 import joblib
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -15,6 +16,14 @@ app = FastAPI(title="Fake News Detection API", description="API to classify news
 
 vectorizer = None
 svm_model = None
+
+def sigmoid(x: float) -> float:
+    # numerically stable sigmoid function
+    if x >= 0:
+        return 1.0 / (1.0 + math.exp(-x))
+    else:
+        z = math.exp(x)
+        return z / (1.0 + z)
 
 @app.on_event("startup")
 def load_models():
@@ -33,7 +42,7 @@ class NewsRequest(BaseModel):
 
 class NewsResponse(BaseModel):
     prediction: str
-    confidence: float = 1.0
+    confidence: float
 
 @app.post("/predict", response_model=NewsResponse)
 def predict_news(request: NewsRequest):
@@ -44,11 +53,18 @@ def predict_news(request: NewsRequest):
     cleaned = clean_text(request.text)
     vec_text = vectorizer.transform([cleaned])
     
+    # distance from the separating hyperplane
+    decision_score = float(svm_model.decision_function(vec_text)[0])
+    prob_fake = sigmoid(decision_score)
+    
     # model prediction: 0 is Real, 1 is Fake
     pred = int(svm_model.predict(vec_text)[0])
     label = "Fake" if pred == 1 else "Real"
     
-    return {"prediction": label, "confidence": 1.0}
+    # confidence is the model's certainty for the predicted class
+    confidence = prob_fake if pred == 1 else (1.0 - prob_fake)
+    
+    return {"prediction": label, "confidence": round(float(confidence), 4)}
 
 @app.get("/")
 def read_root():
