@@ -76,25 +76,11 @@ You can test the `/predict` endpoint directly in the Swagger UI (`/docs`) or by 
   "text": "The Federal Reserve announced on Wednesday that it will raise interest rates by 0.25% in an effort to combat inflation."
 }
 ```
-Expected output:
-```json
-{
-  "prediction": "Real",
-  "confidence": 1.0
-}
-```
 
 ### Example 2: Fake News
 ```json
 {
   "text": "Pope Francis shocks the world by officially endorsing Donald Trump for President in the upcoming election."
-}
-```
-Expected output:
-```json
-{
-  "prediction": "Fake",
-  "confidence": 1.0
 }
 ```
 
