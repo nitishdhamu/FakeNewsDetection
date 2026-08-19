@@ -11,8 +11,6 @@ FakeNewsDetection/
 │
 ├── data/                  # Dataset folder (created automatically on download)
 ├── models/                # Saved model and vectorizer .pkl files
-├── notebooks/
-│   └── EDA.ipynb          # Exploratory data analysis notebook
 ├── src/
 │   ├── __init__.py
 │   ├── data_loader.py     # Downloads and splits dataset from Hugging Face
@@ -83,6 +81,3 @@ You can test the `/predict` endpoint directly in the Swagger UI (`/docs`) or by 
   "text": "Pope Francis shocks the world by officially endorsing Donald Trump for President in the upcoming election."
 }
 ```
-
-## Exploratory Data Analysis
-You can open `notebooks/EDA.ipynb` in Jupyter Notebook or VS Code to see class distribution and text length plots.
