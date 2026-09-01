@@ -11,4 +11,5 @@ uvicorn
 nltk
 pydantic
 gdown
-
+datasets
+joblib
