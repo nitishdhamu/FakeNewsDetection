@@ -34,22 +34,19 @@ FakeNewsDetection/
    cd FakeNewsDetection
    ```
 
-2. **Create a virtual environment and install dependencies**:
+2. **Create a virtual environment** and install dependencies:
 
    **For Windows:**
    ```bash
    python -m venv .venv
    .venv\Scripts\activate
+   pip install -r requirements.txt
    ```
 
    **For macOS and Linux:**
    ```bash
    python3 -m venv .venv
    source .venv/bin/activate
-   ```
-
-   **Install the requirements** (run this after activating the environment):
-   ```bash
    pip install -r requirements.txt
    ```
 
