@@ -1,97 +1,85 @@
-# Fake News Detection
+# 📰 Fake News Detection
 
-This is an end-to-end Fake News Detection pipeline built using Natural Language Processing (NLP) techniques and Machine Learning. 
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-Enabled-orange)
+![FastAPI](https://img.shields.io/badge/FastAPI-Enabled-green)
+![Status](https://img.shields.io/badge/Status-Complete-success)
 
-It satisfies the following guidelines:
-* Uses a public dataset from Hugging Face (`GonzaloA/fake_news`).
-* Applies NLP techniques like TF-IDF vectorization (with support for BERT).
-* Uses classification models (SVM by default, structure for BERT included).
-* Exposes a FastAPI application for real-time inference.
+Welcome to the **Fake News Detection** pipeline! This repository houses an end-to-end Machine Learning solution designed to solve one of the biggest problems in modern media: **Identifying Misinformation**.
 
-## Project Structure
+By analyzing the textual content of news articles, this tool uses Natural Language Processing (NLP) techniques to predict whether a given news article is Fake or Real.
 
-```
-FakeNewsDetection/
-│
-├── data/                  # Dataset (csv files, downloaded via script)
-├── models/                # Saved models and vectorizers
-├── notebooks/
-│   └── EDA.ipynb          # Exploratory Data Analysis notebook
-├── src/
-│   ├── data_loader.py     # Script to download/load the dataset
-│   ├── preprocess.py      # Text cleaning and TF-IDF logic
-│   ├── model.py           # Model definitions (SVM, BERT)
-│   └── train.py           # Main training script
-├── app.py                 # FastAPI application for inference
-├── requirements.txt       # Project dependencies
-└── .gitignore
-```
+---
 
-## Setup & Installation
+## ⚙️ What Does This Project Do?
 
-1. **Clone the repository** (if on Github) and navigate to the folder:
-   ```bash
-   cd FakeNewsDetection
-   ```
+1. **Fetches Public Datasets**: It automatically connects to the Hugging Face hub to download the `GonzaloA/fake_news` dataset and extracts testing, training, and validation samples.
+2. **Trains Predictive Models**: It cleans the text (removing URLs, special characters), applies NLP techniques like TF-IDF vectorization, and trains robust models:
+   - **Support Vector Machine (SVM)**: A highly effective statistical baseline model (Default).
+   - **BERT (Transformers)**: A state-of-the-art Deep Learning sequence classification model.
+3. **Real-World Inference**: It exposes the trained models via a production-grade **FastAPI** web application, allowing you to instantly classify any custom news text in real-time.
 
-2. **Create a virtual environment** and install dependencies:
+---
 
-   **For Windows:**
-   ```bash
-   python -m venv .venv
-   .venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
+## 📖 Quick Start Guide
 
-   **For macOS and Linux:**
-   ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate
-   pip install -r requirements.txt
-   ```
+### Prerequisites
+Make sure you have **Python 3.8+** installed on your system.
 
-## Training the Model
-
-By default, the script trains a Support Vector Machine (SVM) using TF-IDF features.
-
-1. Navigate to the `src` folder:
-   ```bash
-   cd src
-   ```
-
-2. Run the training script:
-   ```bash
-   python train.py --model svm
-   ```
-   This will download the dataset to `../data/`, preprocess the text, train an SVM, and save the model artifacts (vectorizer and classifier) to `../models/`.
-
-*(Optional)* To train using BERT (requires `transformers` and `torch`):
+### 1. Clone the Repository
 ```bash
-python train.py --model bert
+git clone https://github.com/nitishdhamu/FakeNewsDetection.git
+cd FakeNewsDetection
 ```
 
-## Running the API
+### 2. Set Up a Virtual Environment (Recommended)
+**For Windows:**
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+```
 
-Once the model is trained and saved in the `models/` directory, you can start the API:
+**For macOS / Linux:**
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### 3. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Run the Machine Learning Pipeline (Training)
+This script orchestrates the entire pipeline: downloading the data to `data/`, preprocessing the text, training the SVM model, and saving the model artifacts (vectorizer and classifier) to `models/`.
+
+```bash
+python src/train.py --model svm
+```
+
+*(Optional)* To train using BERT instead (requires `transformers` and `torch`):
+```bash
+python src/train.py --model bert
+```
+
+### 5. Predict Real-World Articles (Inference API)
+Once the model is trained and saved in the `models/` directory, you can start the real-time API server!
 
 ```bash
 uvicorn app:app --reload
 ```
 
-Then visit `http://127.0.0.1:8000/docs` in your browser to test the `/predict` endpoint interactively.
+Then visit `http://127.0.0.1:8000/docs` in your browser to interactively test the `/predict` endpoint.
 
-### Example API Request
-
+**Example API Request:**
 ```json
 {
   "text": "Scientists have discovered a new species of glowing mushrooms in the Amazon rainforest."
 }
 ```
 
-## EDA
-
+### 6. Exploratory Data Analysis (EDA)
 To view the Exploratory Data Analysis, open `notebooks/EDA.ipynb` in Jupyter or VSCode.
 
-## Note
-The dataset uses 0 for Real News and 1 for Fake News. The preprocessing removes special characters, URLs, and standardizes the text before feeding it to the TF-IDF vectorizer.
-
+---
+*Created as part of a Data Science Internship Project.*
