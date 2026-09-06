@@ -52,7 +52,7 @@ pip install -r requirements.txt
 This script orchestrates the entire pipeline: downloading the data to `data/`, preprocessing the text, training the SVM model, and saving the model artifacts (vectorizer and classifier) to `models/`.
 
 ```bash
-python src/train.py
+python src/train_models.py
 ```
 
 ### 5. Predict Real-World Articles (Inference API)
