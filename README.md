@@ -73,17 +73,17 @@ Then visit `http://127.0.0.1:8000/docs` in your browser to interactively test th
 
 **Example API Requests:**
 
-*Test 1 (Real News):*
+*Test 1: Real News*
 ```json
 {
-  "text": "WASHINGTON (Reuters) - The United States Senate on Thursday passed a sweeping tax reform bill, moving closer to the first major legislative victory for the administration."
+  "text": "The Federal Reserve announced on Wednesday that it will raise interest rates by 0.25% in an effort to combat inflation."
 }
 ```
 
-*Test 2 (Fake News):*
+*Test 2: Fake News*
 ```json
 {
-  "text": "BREAKING: Hillary Clinton Arrested By Military Tribunal At Guantanamo Bay! Mainstream media is completely silent about this massive scandal."
+  "text": "Pope Francis shocks the world by officially endorsing Donald Trump for President in the upcoming election."
 }
 ```
 
