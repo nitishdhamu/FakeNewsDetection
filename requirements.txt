@@ -1,8 +1,6 @@
 pandas
 numpy
 scikit-learn
-torch
-transformers
 matplotlib
 seaborn
 jupyter

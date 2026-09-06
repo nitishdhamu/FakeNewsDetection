@@ -14,9 +14,7 @@ By analyzing the textual content of news articles, this tool uses Natural Langua
 ## ⚙️ What Does This Project Do?
 
 1. **Fetches Public Datasets**: It automatically connects to the Hugging Face hub to download the `GonzaloA/fake_news` dataset and extracts testing, training, and validation samples.
-2. **Trains Predictive Models**: It cleans the text (removing URLs, special characters), applies NLP techniques like TF-IDF vectorization, and trains robust models:
-   - **Support Vector Machine (SVM)**: A highly effective statistical baseline model (Default).
-   - **BERT (Transformers)**: A state-of-the-art Deep Learning sequence classification model.
+2. **Trains Predictive Models**: It cleans the text (removing URLs, special characters), applies NLP techniques like TF-IDF vectorization, and trains a highly effective statistical baseline model (**Support Vector Machine (SVM)**).
 3. **Real-World Inference**: It exposes the trained models via a production-grade **FastAPI** web application, allowing you to instantly classify any custom news text in real-time.
 
 ---
@@ -54,12 +52,7 @@ pip install -r requirements.txt
 This script orchestrates the entire pipeline: downloading the data to `data/`, preprocessing the text, training the SVM model, and saving the model artifacts (vectorizer and classifier) to `models/`.
 
 ```bash
-python src/train.py --model svm
-```
-
-*(Optional)* To train using BERT instead (requires `transformers` and `torch`):
-```bash
-python src/train.py --model bert
+python src/train.py
 ```
 
 ### 5. Predict Real-World Articles (Inference API)
@@ -73,14 +66,14 @@ Then visit `http://127.0.0.1:8000/docs` in your browser to interactively test th
 
 **Example API Requests:**
 
-*Test 1: Real News*
+*Test 1:*
 ```json
 {
   "text": "The Federal Reserve announced on Wednesday that it will raise interest rates by 0.25% in an effort to combat inflation."
 }
 ```
 
-*Test 2: Fake News*
+*Test 2:*
 ```json
 {
   "text": "Pope Francis shocks the world by officially endorsing Donald Trump for President in the upcoming election."
