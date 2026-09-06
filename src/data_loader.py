@@ -29,5 +29,7 @@ def load_fake_news_dataset(save_dir="data"):
     return train_df, val_df, test_df
 
 if __name__ == "__main__":
-    load_fake_news_dataset("../data")
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    data_dir = os.path.join(project_root, 'data')
+    load_fake_news_dataset(save_dir=data_dir)
 
