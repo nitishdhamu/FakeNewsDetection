@@ -15,6 +15,9 @@ MODEL_DIR = "models"
 vectorizer = None
 svm_model = None
 
+import webbrowser
+from threading import Timer
+
 @app.on_event("startup")
 def load_models():
     global vectorizer, svm_model
@@ -22,6 +25,9 @@ def load_models():
         vectorizer = joblib.load(os.path.join(MODEL_DIR, "tfidf_vectorizer.pkl"))
         svm_model = joblib.load(os.path.join(MODEL_DIR, "svm_model.pkl"))
         print("Models loaded successfully.")
+        
+        # Automatically open the browser to the /docs page after 1.5 seconds
+        Timer(1.5, lambda: webbrowser.open("http://127.0.0.1:8000/docs")).start()
     except Exception as e:
         print(f"Warning: Could not load models. Did you train them? Error: {e}")
 
